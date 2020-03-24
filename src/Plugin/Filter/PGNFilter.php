@@ -18,8 +18,9 @@ class PGNFilter extends FilterBase
 
   public function process($text, $langcode)
   {
-    $replace = '<span class="celebrate-filter">' . $this->t('Good Times!') . ' </span>';
-    $new_text = str_replace('[celebrate]', $replace, $text);
+    $pattern = '@\[pgn\](.*?)\[/pgn\]@si';
+    $replace = '<div class="EmbedBoard">$1</div>';
+    $new_text = preg_replace($pattern, $replace, $text);
     return new FilterProcessResult($new_text);
   }
 }
